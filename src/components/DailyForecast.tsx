@@ -94,6 +94,12 @@ export default function DailyForecast({
                     <span>{maxTempArr?.[index]}&deg;</span>
                   </div>
                 )}
+                {tempUnit === "imperial" && (
+                  <div className="flex justify-between text-[.9rem]">
+                    <span>{getFahrenheit(minTempArr?.[index])}&deg;</span>
+                    <span>{getFahrenheit(maxTempArr?.[index])}&deg;</span>
+                  </div>
+                )}
               </div>
             );
           })}

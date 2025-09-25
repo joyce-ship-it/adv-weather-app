@@ -25,7 +25,7 @@ export default function Header() {
           className="flex cursor-pointer items-center gap-2 rounded-[4px] bg-neutral-800 px-2 py-1"
         >
           <div>
-            <img src={units} alt="units-icon" />
+            <img src={units} alt="settings-icon" />
           </div>
           <div>Units</div>
           <div>

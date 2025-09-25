@@ -1,4 +1,4 @@
 type kphType = number;
 export default function getMiles(kph: kphType) {
-  return Math.ceil(kph / 1.60934);
+  return Math.round(kph / 1.60934);
 }

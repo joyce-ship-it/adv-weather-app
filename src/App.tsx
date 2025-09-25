@@ -10,14 +10,14 @@ import HourlyForecast from "./components/HourlyForecast";
 import UnitContextProvider from "./Context/UnitContextProvider";
 
 function App() {
-  const { status, weatherData, search } = useWeatherSearch();
+  const { status, weatherData, search, getWeather } = useWeatherSearch();
   console.log(status, weatherData);
   return (
     <UnitContextProvider>
       <div className="min-h-screen">
         <Header></Header>
         <Title></Title>
-        <Search search={search}></Search>
+        <Search search={search} getWeather={getWeather}></Search>
         <NoResults status={status}></NoResults>
         <div className="max-w-[1200px] items-start md:flex md:overflow-auto">
           <MainDisplay status={status} weatherData={weatherData}></MainDisplay>
@@ -26,9 +26,11 @@ function App() {
             weatherData={weatherData}
           ></HourlyForecast>
         </div>
-        <footer className="invisible p-4 text-center text-neutral-100">
-          Made with 💓
-        </footer>
+        {status === "success" && (
+          <footer className="p-4 text-center text-neutral-100">
+            Made with 💓
+          </footer>
+        )}
       </div>
     </UnitContextProvider>
   );

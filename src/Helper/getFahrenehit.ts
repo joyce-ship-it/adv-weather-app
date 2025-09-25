@@ -1,4 +1,5 @@
-type celsiusType = number;
+type celsiusType = number | undefined;
 export default function getFahrenheit(celsius: celsiusType) {
-  return Math.ceil(celsius * (9 / 5) + 32);
+  if (celsius === undefined) return "--";
+  return Math.round(celsius * (9 / 5) + 32);
 }

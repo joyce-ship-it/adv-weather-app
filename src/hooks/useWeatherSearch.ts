@@ -48,6 +48,7 @@ export default function useWeatherSearch() {
     const url2 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=weather_code,apparent_temperature&current=wind_speed_10m,apparent_temperature,temperature_2m,precipitation,relative_humidity_2m,weather_code&timezone=auto`;
 
     try {
+      setStatus("loading");
       const res = await fetch(url2);
       if (!res.ok) {
         throw new Error("Server error while fetching weather data");
@@ -71,5 +72,5 @@ export default function useWeatherSearch() {
       );
     }
   }
-  return { status, weatherData, locationData, search };
+  return { status, weatherData, locationData, search, getWeather };
 }
