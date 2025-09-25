@@ -15,11 +15,9 @@ export default function useWeatherSearch() {
   const [locationData, setLocationData] = React.useState<LocationType | null>(
     null,
   );
-  // const [windSpeedUnit, setWindSpeedUnit] = React.useState("metric");
-  // const [tempUnit, setTempUnit] = React.useState("metric");
-  // const [precipUnit, setPrecipUnit] = React.useState("metric");
+
   async function getLocation(query: string) {
-    const url1 = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=1&language=en&format=json`;
+    const url1 = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=en&format=json`;
     try {
       setStatus("loading");
       const res = await fetch(url1);
@@ -31,6 +29,7 @@ export default function useWeatherSearch() {
         setStatus("empty");
         return;
       }
+      console.log(data);
       const { name: city, country, latitude, longitude } = data.results[0];
       const location = { city, country, latitude, longitude };
       setLocationData(location);

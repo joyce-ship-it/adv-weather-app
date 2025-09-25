@@ -16,7 +16,7 @@ export default function Search({
   return (
     <form
       onSubmit={handleSubmit}
-      className="text-neutral-000 flex max-w-[650px] flex-col gap-2 p-4 md:mx-auto md:flex-row"
+      className="text-neutral-000 mx-auto flex max-w-[650px] flex-col gap-2 p-2 px-4 md:mx-auto md:flex-row"
     >
       <div className="relative flex w-[100%] items-center rounded-[4px]">
         <input

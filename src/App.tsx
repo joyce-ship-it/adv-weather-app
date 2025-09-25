@@ -6,40 +6,31 @@ import Search from "./components/Search";
 import NoResults from "./components/NoResults";
 import MainDisplay from "./components/MainDisplay";
 import useWeatherSearch from "./hooks/useWeatherSearch";
+import HourlyForecast from "./components/HourlyForecast";
+import UnitContextProvider from "./Context/UnitContextProvider";
 
 function App() {
-  // React.useEffect(() => {
-  //   async function getLocation() {
-  //     const response = await fetch(
-  //       `https://geocoding-api.open-meteo.com/v1/search?name=chennai&count=1&language=en&format=json`,
-  //     );
-  //     const data = await response.json();
-  //     if (!data.results) {
-  //       console.log("empty");
-  //       return;
-  //     }
-
-  //     const { name: city, country, latitude, longitude } = data.results[0];
-  //     const weatherResponse = await fetch(
-  //       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=weather_code,apparent_temperature&current=wind_speed_10m,apparent_temperature,temperature_2m,precipitation,relative_humidity_2m,weather_code&timezone=auto`,
-  //     );
-  //     const weatherData = await weatherResponse.json();
-  //     console.log(weatherData);
-  //   }
-
-  //   getLocation();
-  // }, []);
-
   const { status, weatherData, search } = useWeatherSearch();
   console.log(status, weatherData);
   return (
-    <div>
-      <Header></Header>
-      <Title></Title>
-      <Search search={search}></Search>
-      <NoResults status={status}></NoResults>
-      <MainDisplay status={status} weatherData={weatherData}></MainDisplay>
-    </div>
+    <UnitContextProvider>
+      <div className="min-h-screen">
+        <Header></Header>
+        <Title></Title>
+        <Search search={search}></Search>
+        <NoResults status={status}></NoResults>
+        <div className="max-w-[1200px] items-start md:flex md:overflow-auto">
+          <MainDisplay status={status} weatherData={weatherData}></MainDisplay>
+          <HourlyForecast
+            status={status}
+            weatherData={weatherData}
+          ></HourlyForecast>
+        </div>
+        <footer className="invisible p-4 text-center text-neutral-100">
+          Made with 💓
+        </footer>
+      </div>
+    </UnitContextProvider>
   );
 }
 
