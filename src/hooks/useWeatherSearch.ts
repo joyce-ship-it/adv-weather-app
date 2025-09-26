@@ -3,18 +3,21 @@ type statusType = "idle" | "loading" | "success" | "error" | "empty";
 
 // https://geocoding-api.open-meteo.com/v1/search?name=nnkj&count=1&language=en&format=json
 type LocationType = {
-  city: string | null;
-  country: string | null;
-  latitude: number | null;
-  longitude: number | null;
+  city: string;
+  country: string;
+  latitude: number;
+  longitude: number;
 };
 
 export default function useWeatherSearch() {
   const [status, setStatus] = React.useState<statusType>("idle");
   const [weatherData, setWeatherData] = React.useState(null);
-  const [locationData, setLocationData] = React.useState<LocationType | null>(
-    null,
-  );
+  const [locationData, setLocationData] = React.useState<LocationType>({
+    latitude: 0,
+    longitude: 0,
+    city: "",
+    country: "",
+  });
 
   async function getLocation(query: string) {
     const url1 = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=en&format=json`;

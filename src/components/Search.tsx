@@ -2,7 +2,7 @@ import React from "react";
 import searchIcon from "../assets/images/icon-search.svg";
 type locationSuggestionType = {
   city: string;
-  country: "string";
+  country: string;
   latitude: number;
   longitude: number;
 };
