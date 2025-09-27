@@ -33,7 +33,7 @@ export default function Header() {
           </div>
         </button>
         {isUnitOpen && (
-          <div className="absolute top-10 right-0 z-1 w-[150px] self-stretch rounded-[8px] bg-neutral-800 p-1 text-[1rem]">
+          <div className="absolute top-10 right-0 z-11 w-[150px] self-stretch rounded-[8px] bg-neutral-800 p-1 text-[1rem]">
             {val?.unit === "metric" ? (
               <button
                 className="pb-3 text-neutral-50"
