@@ -6,8 +6,21 @@ import React from "react";
 import { UnitContext } from "../Context/UnitContextProvider";
 export default function Header() {
   const val = React.useContext(UnitContext);
-  console.log(val);
+
   const [isUnitOpen, setIsUnitOpen] = React.useState(false);
+  const dropDownRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    function handleOutsideClick(e: MouseEvent) {
+      if (
+        dropDownRef.current &&
+        !dropDownRef.current.contains(e.target as Node)
+      ) {
+        setIsUnitOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
   function toggleOpen() {
     const currentVal = isUnitOpen;
     setIsUnitOpen(!currentVal);
@@ -33,7 +46,10 @@ export default function Header() {
           </div>
         </button>
         {isUnitOpen && (
-          <div className="absolute top-10 right-0 z-11 w-[150px] self-stretch rounded-[8px] bg-neutral-800 p-1 text-[1rem]">
+          <div
+            ref={dropDownRef}
+            className="absolute top-10 right-0 z-11 w-[150px] self-stretch rounded-[8px] bg-neutral-800 p-1 text-[1rem]"
+          >
             {val?.unit === "metric" ? (
               <button
                 className="pb-3 text-neutral-50"
