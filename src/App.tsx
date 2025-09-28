@@ -17,7 +17,7 @@ function App() {
   console.log(status, weatherData);
   return (
     <UnitContextProvider>
-      <div className="min-h-screen">
+      <div className="font-Bricolage min-h-screen">
         <Header></Header>
         <Title></Title>
         <Error
