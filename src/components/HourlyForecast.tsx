@@ -42,6 +42,7 @@ import getDay from "../Helper/getDay";
 import getHour from "../Helper/getHour";
 import { UnitContext } from "../Context/UnitContextProvider";
 import getFahrenheit from "../Helper/getFahrenehit";
+import { FaMoon } from "react-icons/fa";
 
 export default function HourlyForecast({
   status,
@@ -58,6 +59,20 @@ export default function HourlyForecast({
     "Thursday",
     "Friday",
     "Saturday",
+  ];
+  const moon = [
+    "12 AM",
+    "1 AM",
+    "2 AM",
+    "3 AM",
+    "4 AM",
+    "5 AM",
+    "6 AM",
+    "7 PM",
+    "8 PM",
+    "9 PM",
+    "10 PM",
+    "11 PM",
   ];
   const [selectedDay, setSelectedDay] = React.useState("");
   const [displayArr, setDisplayArr] = React.useState<combinedArrayProps[]>([]);
@@ -149,12 +164,17 @@ export default function HourlyForecast({
                     className="flex items-center justify-between rounded-xl bg-neutral-700 pr-4"
                   >
                     <div className="flex items-center gap-2">
-                      <div className="h-[4rem] w-[4rem]">
-                        <img
-                          src={item.imageDetails?.src}
-                          alt={item.imageDetails?.alt}
-                          className="h-full w-full"
-                        ></img>
+                      <div className="flex h-[4rem] w-[4rem] items-center justify-center">
+                        {item.imageDetails?.alt === "clear sky" &&
+                        moon.includes(item.hour || "") ? (
+                          <FaMoon size={24} />
+                        ) : (
+                          <img
+                            src={item.imageDetails?.src}
+                            alt={item.imageDetails?.alt}
+                            className="h-full w-full"
+                          ></img>
+                        )}
                       </div>
                       <div>{item.hour}</div>
                     </div>
