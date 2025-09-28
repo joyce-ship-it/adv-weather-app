@@ -19,6 +19,19 @@ export default function Search({ search, getWeather }: searchProps) {
   const [inputVal, setInputVal] = React.useState("");
   const [status, setStatus] = React.useState("");
   const [locationSuggestions, setLocationSuggestions] = React.useState([]);
+  const locationSuggestionsRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        locationSuggestionsRef.current &&
+        !locationSuggestionsRef.current.contains(e.target as Node)
+      ) {
+        setStatus("close");
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
   React.useEffect(() => {
     async function getLocationSuggestions(query: string) {
       const url1 = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=en&format=json`;
@@ -55,7 +68,7 @@ export default function Search({ search, getWeather }: searchProps) {
         setStatus("error");
       }
     }
-    getLocationSuggestions(inputVal);
+    if (inputVal.length >= 2) getLocationSuggestions(inputVal);
   }, [inputVal]);
 
   function handleSuggestion(suggestion: locationSuggestionType) {
@@ -90,7 +103,10 @@ export default function Search({ search, getWeather }: searchProps) {
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
             />
-            <div className="absolute top-12 w-full bg-neutral-800 text-neutral-200">
+            <div
+              className="absolute top-12 w-full bg-neutral-800 text-neutral-200"
+              ref={locationSuggestionsRef}
+            >
               {status === "success" &&
                 locationSuggestions.map(
                   (suggestion: locationSuggestionType, index: number) => {
