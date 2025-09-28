@@ -75,7 +75,7 @@ export default function Infograph({
         <div className="flex items-center justify-center gap-4">
           <div className="flex h-[5rem] w-[5rem] items-center justify-center">
             {isClearSkyNight ? (
-              <FaMoon size={40} />
+              <FaMoon size={40} color="white" />
             ) : (
               <img
                 className="h-full w-full"
