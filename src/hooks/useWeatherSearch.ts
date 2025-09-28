@@ -75,6 +75,5 @@ export default function useWeatherSearch() {
       );
     }
   }
-  console.log(weatherData);
   return { status, weatherData, locationData, search, getWeather };
 }

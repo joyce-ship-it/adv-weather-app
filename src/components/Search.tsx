@@ -2,6 +2,7 @@ import React from "react";
 import searchIcon from "../assets/images/icon-search.svg";
 type locationSuggestionType = {
   city: string;
+  state: string;
   country: string;
   latitude: number;
   longitude: number;
@@ -51,11 +52,13 @@ export default function Search({ search, getWeather }: searchProps) {
           (item: {
             name: string;
             country: string;
+            admin1: string;
             latitude: number;
             longitude: number;
           }) => ({
             city: item.name,
             country: item.country,
+            state: item.admin1,
             latitude: item.latitude,
             longitude: item.longitude,
           }),
@@ -116,7 +119,9 @@ export default function Search({ search, getWeather }: searchProps) {
                         onClick={() => handleSuggestion(suggestion)}
                         className="p-1 hover:bg-neutral-700"
                       >
-                        {suggestion.city}, {suggestion.country}
+                        {suggestion.city},{" "}
+                        {suggestion.state && `${suggestion.state}, `}
+                        {suggestion.country}
                       </div>
                     );
                   },
