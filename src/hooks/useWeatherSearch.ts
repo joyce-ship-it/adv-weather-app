@@ -48,7 +48,7 @@ export default function useWeatherSearch() {
     city: string,
     country: string,
   ) {
-    const url2 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=weather_code,apparent_temperature&current=wind_speed_10m,apparent_temperature,temperature_2m,precipitation,relative_humidity_2m,weather_code&timezone=auto`;
+    const url2 = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=weather_code,apparent_temperature&current=wind_speed_10m,apparent_temperature,temperature_2m,precipitation,relative_humidity_2m,weather_code,is_day&timezone=auto`;
 
     try {
       setStatus("loading");
@@ -75,5 +75,6 @@ export default function useWeatherSearch() {
       );
     }
   }
+  console.log(weatherData);
   return { status, weatherData, locationData, search, getWeather };
 }

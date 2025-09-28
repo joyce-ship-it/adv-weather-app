@@ -11,6 +11,7 @@ type weatherDataType = {
     relative_humidity_2m: number;
     time: string;
     weather_code: number;
+    is_day: number;
   };
   daily: {
     time: string[];
@@ -28,6 +29,7 @@ type weatherDataType = {
 import { UnitContext } from "../Context/UnitContextProvider";
 import getFahrenheit from "../Helper/getFahrenehit";
 import getWeatherDetails from "../Helper/getWeatherDetails";
+import { FaMoon } from "react-icons/fa";
 
 export default function Infograph({
   status,
@@ -57,6 +59,8 @@ export default function Infograph({
     const weatherCode = weatherData?.current?.weather_code;
     const temperature = weatherData?.current?.apparent_temperature;
     const imgDetails = getWeatherDetails(weatherCode);
+    const isNight = weatherData?.current?.is_day === 0;
+    const isClearSkyNight = isNight && (weatherCode === 0 || weatherCode === 1);
 
     return (
       <div
@@ -69,12 +73,16 @@ export default function Infograph({
           <p className="text-[1.2rem] text-neutral-200">{formattedDate}</p>
         </div>
         <div className="flex items-center justify-center gap-4">
-          <div className="h-[5rem] w-[5rem]">
-            <img
-              className="h-full w-full"
-              src={imgDetails.src}
-              alt={imgDetails.alt}
-            />
+          <div className="flex h-[5rem] w-[5rem] items-center justify-center">
+            {isClearSkyNight ? (
+              <FaMoon size={40} />
+            ) : (
+              <img
+                className="h-full w-full"
+                src={imgDetails.src}
+                alt={imgDetails.alt}
+              />
+            )}
           </div>
           {tempUnit === "metric" && (
             <p className="text-7xl font-bold text-neutral-100 italic">
