@@ -28,8 +28,8 @@ export default function Header() {
   return (
     <header className="text-neutral-000 flex items-center justify-between px-2 pt-4">
       <a href="#">
-        <div>
-          <img src={logo} alt="logo" />
+        <div className="w-[10rem]">
+          <img src={logo} alt="logo" className="w-full" />
         </div>
       </a>
       <div className="relative">
