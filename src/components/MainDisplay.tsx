@@ -13,6 +13,7 @@ type weatherDataType = {
     relative_humidity_2m: number;
     time: string;
     weather_code: number;
+    is_day: number;
   };
   daily: {
     time: string[];
