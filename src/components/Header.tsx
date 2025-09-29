@@ -9,11 +9,13 @@ export default function Header() {
 
   const [isUnitOpen, setIsUnitOpen] = React.useState(false);
   const dropDownRef = React.useRef<HTMLDivElement>(null);
+  const unitButtonRef = React.useRef<HTMLButtonElement>(null);
   React.useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
       if (
         dropDownRef.current &&
-        !dropDownRef.current.contains(e.target as Node)
+        !dropDownRef.current.contains(e.target as Node) &&
+        e.target != unitButtonRef.current
       ) {
         setIsUnitOpen(false);
       }
@@ -34,6 +36,7 @@ export default function Header() {
       </a>
       <div className="relative">
         <button
+          ref={unitButtonRef}
           onClick={toggleOpen}
           className="flex cursor-pointer items-center gap-2 rounded-[4px] bg-neutral-800 px-2 py-1"
         >
