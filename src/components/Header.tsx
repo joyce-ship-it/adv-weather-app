@@ -34,11 +34,11 @@ export default function Header() {
           <img src={logo} alt="logo" className="w-full" />
         </div>
       </a>
-      <div className="relative">
+      <div className="relative p-0">
         <button
           ref={unitButtonRef}
           onClick={toggleOpen}
-          className="flex cursor-pointer items-center gap-2 rounded-[4px] bg-neutral-800 px-2 py-1"
+          className="flex cursor-pointer items-center gap-2 rounded-[4px] bg-neutral-800 px-2 py-1 [&>*]:pointer-events-none"
         >
           <div>
             <img src={units} alt="settings-icon" />
